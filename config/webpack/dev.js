@@ -20,8 +20,7 @@ var config = {
     app: [
       'webpack-hot-middleware/client?reload=true',
       './src/client.tsx',
-      './src/vendor/main.ts'
-    ]
+    ],
   },
 
   output: {
@@ -33,17 +32,20 @@ var config = {
 
   module: {
     rules: [{
-        enforce: 'pre',
-        test: /\.tsx?$/,
-        loader: 'tslint-loader'
-      },
+      enforce: 'pre',
+      test: /\.tsx?$/,
+      loader: 'tslint-loader',
+      exclude: [path.resolve('./old/')]
+    },
       {
         test: /\.tsx?$/,
-        loaders: ['react-hot-loader/webpack', 'awesome-typescript-loader']
+        loaders: ['react-hot-loader/webpack', 'awesome-typescript-loader'],
+        exclude: [path.resolve('./old/')]
       },
       {
         test: /\.jsx$/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        exclude: [path.resolve('./old/')]
       },
       {
         test: /\.json$/,
@@ -56,7 +58,7 @@ var config = {
           'style-loader',
           'css-loader?modules&importLoaders=2&localIdentName=[local]___[hash:base64:5]',
           'postcss-loader'
-        ]
+        ],
       },
       {
         test: /\.css$/,
@@ -98,7 +100,7 @@ var config = {
         tslint: {
           failOnHint: true
         },
-        postcss: function () {
+        postcss: function() {
           return [
             stylelint({
               files: '../../src/app/*.css'

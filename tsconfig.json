@@ -23,7 +23,8 @@
     "node_modules",
     "build",
     "typings/main",
-    "typings/main.d.ts"
+    "typings/main.d.ts",
+    "old"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useCache": true,
