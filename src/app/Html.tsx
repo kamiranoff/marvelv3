@@ -2,18 +2,12 @@ import {IStore} from 'redux/IStore';
 import * as React from 'react';
 import {Helmet} from 'react-helmet';
 import * as serialize from 'serialize-javascript';
-import styled from 'styled-components';
 
 interface IHtmlProps {
   manifest?: any;
   markup?: string;
   store?: Redux.Store<IStore>;
 }
-
-const Body = styled.body`
-  padding: 0; 
-  margin: 0;
-`;
 
 class Html extends React.Component<IHtmlProps, {}> {
   private resolve(files) {
@@ -58,11 +52,11 @@ class Html extends React.Component<IHtmlProps, {}> {
         {renderStyles}
         <link rel="shortcut icon" href="/favicon.ico" />
       </head>
-      <Body>
+      <body style={{padding: 0, margin: 0}}>
       <main id="app" dangerouslySetInnerHTML={{__html: markup}} />
       {initialState}
       {renderScripts}
-      </Body>
+      </body>
       </html>
     );
   }
