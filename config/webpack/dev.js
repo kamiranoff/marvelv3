@@ -18,6 +18,7 @@ var config = {
 
   entry: {
     app: [
+      'babel-polyfill',
       'webpack-hot-middleware/client?reload=true',
       './src/client.tsx',
     ],

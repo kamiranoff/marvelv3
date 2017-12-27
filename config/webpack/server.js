@@ -6,10 +6,10 @@ var postcssNext = require('postcss-cssnext');
 
 var nodeModules = {};
 fs.readdirSync('node_modules')
-  .filter(function (x) {
+  .filter(function(x) {
     return ['.bin'].indexOf(x) === -1;
   })
-  .forEach(function (mod) {
+  .forEach(function(mod) {
     nodeModules[mod] = 'commonjs ' + mod;
   });
 
@@ -22,7 +22,7 @@ var config = {
     modules: [path.resolve(__dirname), 'node_modules', 'server.tsx', 'src',],
   },
 
-  entry: './src/server.tsx',
+  entry: ['babel-polyfill', './src/server.tsx'],
 
   output: {
     path: path.resolve('./build/public'),
@@ -33,9 +33,9 @@ var config = {
 
   module: {
     loaders: [{
-        test: /\.(jpe?g|png|gif)$/i,
-        loader: 'url-loader?limit=1000&name=images/[hash].[ext]'
-      },
+      test: /\.(jpe?g|png|gif)$/i,
+      loader: 'url-loader?limit=1000&name=images/[hash].[ext]'
+    },
       {
         test: /\.json$/,
         loader: 'json-loader'
@@ -68,19 +68,19 @@ var config = {
   },
 
   plugins: [
-      new webpack.LoaderOptionsPlugin({
-        debug: false,
-        options: {
-          postcss: function () {
-            return [
-              postcssNext(),
-              postcssAssets({
-                relative: true
-              }),
-            ];
-          },
-        }
-      })
+    new webpack.LoaderOptionsPlugin({
+      debug: false,
+      options: {
+        postcss: function() {
+          return [
+            postcssNext(),
+            postcssAssets({
+              relative: true
+            }),
+          ];
+        },
+      }
+    })
   ],
 
   node: {

@@ -89,6 +89,7 @@
     "awesome-typescript-loader": "^3.3.0",
     "babel-core": "^6.22.1",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "chai": "^4.1.2",
     "cross-env": "^5.1.1",
@@ -133,6 +134,9 @@
     "webpack-manifest-plugin": "^1.1.0"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-runtime": "^6.26.0",
     "chalk": "^2.3.0",
     "compression": "^1.6.2",
     "es6-promise": "^4.0.5",
@@ -152,6 +156,7 @@
     "redux": "^3.6.0",
     "redux-connect": "^6.0.0",
     "redux-logger": "^3.0.6",
+    "redux-saga": "^0.16.0",
     "redux-thunk": "^2.2.0",
     "serialize-javascript": "1.4.0",
     "serve-favicon": "^2.3.2",
