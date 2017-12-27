@@ -1,7 +1,8 @@
-import { IStore } from 'redux/IStore';
+import {IStore} from 'redux/IStore';
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
+import {Helmet} from 'react-helmet';
 import * as serialize from 'serialize-javascript';
+import styled from 'styled-components';
 
 interface IHtmlProps {
   manifest?: any;
@@ -9,17 +10,24 @@ interface IHtmlProps {
   store?: Redux.Store<IStore>;
 }
 
+const Body = styled.body`
+  padding: 0; 
+  margin: 0;
+`;
+
 class Html extends React.Component<IHtmlProps, {}> {
   private resolve(files) {
     return files.map((src) => {
-      if (!this.props.manifest[src]) { return; }
+      if (!this.props.manifest[src]) {
+        return;
+      }
       return '/public/' + this.props.manifest[src];
     }).filter((file) => file !== undefined);
   }
 
   public render() {
     const head = Helmet.rewind();
-    const { markup, store } = this.props;
+    const {markup, store} = this.props;
 
     const styles = this.resolve(['vendor.css', 'app.css']);
     const renderStyles = styles.map((src, i) =>
@@ -33,8 +41,9 @@ class Html extends React.Component<IHtmlProps, {}> {
 
     // tslint:disable-next-line:max-line-length
     const initialState = (
-      <script dangerouslySetInnerHTML={{ __html: `window.__INITIAL_STATE__=${serialize(store.getState(), { isJSON: true })};` }}
-              charSet="UTF-8" />
+      <script
+        dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${serialize(store.getState(), {isJSON: true})};`}}
+        charSet="UTF-8" />
     );
 
     return (
@@ -49,14 +58,14 @@ class Html extends React.Component<IHtmlProps, {}> {
         {renderStyles}
         <link rel="shortcut icon" href="/favicon.ico" />
       </head>
-      <body>
-      <main id="app" dangerouslySetInnerHTML={{ __html: markup }} />
+      <Body>
+      <main id="app" dangerouslySetInnerHTML={{__html: markup}} />
       {initialState}
       {renderScripts}
-      </body>
+      </Body>
       </html>
     );
   }
 }
 
-export { Html }
+export {Html}

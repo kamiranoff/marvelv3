@@ -3,7 +3,6 @@ var fs = require('fs');
 var webpack = require('webpack');
 var postcssAssets = require('postcss-assets');
 var postcssNext = require('postcss-cssnext');
-var stylelint = require('stylelint');
 
 var nodeModules = {};
 fs.readdirSync('node_modules')
@@ -20,7 +19,7 @@ var config = {
 
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
-    modules: [path.resolve(__dirname), 'node_modules', 'app', 'app/redux'],
+    modules: [path.resolve(__dirname), 'node_modules', 'server.tsx', 'src',],
   },
 
   entry: './src/server.tsx',
