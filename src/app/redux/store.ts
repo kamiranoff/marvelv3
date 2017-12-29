@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import rootReducer from './reducers';
 import { IStore } from './IStore';
-import rootSaga from './sagas/sagas';
+import rootSaga from './sagas';
 
 export function configureStore(history, initialState?: IStore): Redux.Store<IStore> {
   const sagaMiddleware = createSagaMiddleware();

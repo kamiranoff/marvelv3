@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
 
 // 1. worker sagas
-import watchGetCharacters from './charactersSaga';
+import watchGetCharacters from './modules/characters/charactersSaga';
 
 // 2. watcher sagas
 

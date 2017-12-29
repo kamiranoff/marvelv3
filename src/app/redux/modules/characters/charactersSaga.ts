@@ -1,4 +1,4 @@
-import { GET_CHARACTERS } from '../IStore';
+import { GET_CHARACTERS } from '../../IStore';
 import { takeEvery, call } from 'redux-saga/effects';
 
 export function* getCharactersSaga() {
