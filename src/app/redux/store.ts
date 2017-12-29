@@ -20,7 +20,14 @@ export function configureStore(history, initialState?: IStore): Redux.Store<ISto
 
   /** Add Only Dev. Middlewares */
   if (appConfig.env !== 'production' && process.env.BROWSER) {
-    const logger = createLogger();
+    const logger = createLogger({
+      collapsed: true, // takes a Boolean or optionally a Function that receives `getState`
+      // function for accessing current store state and `action` object as parameters.
+      // Returns `true` if the log group should be collapsed, `false` otherwise.
+      duration: true, // print the duration of each action?
+      timestamp: false, // print the timestamp with each action?
+      diff: true, // (alpha) show diff between states?
+    });
     middlewares.push(logger);
   }
 
