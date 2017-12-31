@@ -1,9 +1,5 @@
 import { ICharacters, ICharactersAction } from './index';
-
-/** Action Types */
-export const GET_REQUEST: string = 'characters/GET_REQUEST';
-export const GET_SUCCESS: string = 'characters/GET_SUCCESS';
-export const GET_FAILURE: string = 'characters/GET_FAILURE';
+import { GET_REQUEST, GET_FAILURE, GET_SUCCESS } from './index';
 
 /** Initial State */
 const initialState: ICharacters = {
@@ -36,24 +32,24 @@ export function charactersReducer(state = initialState, action: ICharactersActio
   }
 }
 
-/** Async Action Creator */
-export function getCharacters() {
-  return (dispatch) => {
-    dispatch(charactersRequest());
-
-    return fetch('http://localhost:4444/api/marvelapi/characters?categories=x-men')
-      .then((res) => {
-        if (res.ok) {
-          return res.json()
-            .then((res) => dispatch(charactersSuccess(res)));
-        } else {
-          return res.json()
-            .then((res) => dispatch(charactersFailure(res)));
-        }
-      })
-      .catch((err) => dispatch(charactersFailure(err)));
-  };
-}
+// /** Async Action Creator */
+// export function getCharacters() {
+//   return (dispatch) => {
+//     dispatch(charactersRequest());
+//
+//     return fetch('http://localhost:4444/api/marvelapi/characters?categories=x-men')
+//       .then((res) => {
+//         if (res.ok) {
+//           return res.json()
+//             .then((res) => dispatch(charactersSuccess(res)));
+//         } else {
+//           return res.json()
+//             .then((res) => dispatch(charactersFailure(res)));
+//         }
+//       })
+//       .catch((err) => dispatch(charactersFailure(err)));
+//   };
+// }
 
 /** Action Creator */
 export function charactersRequest(): ICharactersAction {

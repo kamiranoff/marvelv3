@@ -2,12 +2,12 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { getCharacters } from '../redux/modules/characters/characters';
+import { getCharactersSaga } from '../redux/modules/characters/charactersSaga';
 
 // import { ICharacters } from '../redux/modules/characters/index';
 
 export interface IHomeProps {
-  getCharacters: () => any;
+  getCharactersSaga: () => any;
   characters: any;
 }
 
@@ -22,6 +22,10 @@ const Header = styled.header`
   padding: 25px;
 `;
 
+const Image = styled.img`
+  width: 100%;
+`;
+
 class Home extends Component<IHomeProps> {
 
   public static defaultProps = {
@@ -31,7 +35,7 @@ class Home extends Component<IHomeProps> {
   };
 
   public componentWillMount() {
-    this.props.getCharacters();
+    this.props.getCharactersSaga();
   }
 
   public render() {
@@ -41,8 +45,12 @@ class Home extends Component<IHomeProps> {
           <Title>X-Men</Title>
         </Header>
         <section>{this.props.characters.character &&
-        this.props.characters.character.map((char, i) => (
-          <h3 key={i}>{char.character.name}</h3>))}
+        this.props.characters.character.map((char, i) => {
+          return (
+            <div key={`${char.character.name}_${i}`}>
+              <h3>{char.character.name}</h3>
+              <Image src={`${char.character.thumbnail.path}.${char.character.thumbnail.extension}`} /></div>);
+        })}
         </section>
       </div>
     );
@@ -53,4 +61,4 @@ const mapStateToProps = ({ characters }) => ({
   characters,
 });
 
-export default connect(mapStateToProps, { getCharacters })(Home);
+export default connect(mapStateToProps, { getCharactersSaga })(Home);
